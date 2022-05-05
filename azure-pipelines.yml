@@ -1,19 +1,35 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+trigger: none
+stages:
 
-trigger:
-- master
+  - stage: powershell
+    displayName: Build infrastructure
+    jobs:
+    - job: Powershell
+      displayName: Powershell Infra
+      pool:
+        name: My-AKS-Pool
+      steps:
+        - template: powershell.yml
+         
+            
+  - stage: BuildDocker
+    displayName: Build docker
+    jobs:
+    - job: builddocker
+      displayName: Build docker
+      pool:
+        name: My-AKS-Pool
+          
+      steps:
+        - template: dockerbuild.yml
 
-pool:
-  vmImage: ubuntu-latest
-
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  - stage: DeployDocker
+    displayName: Deploy docker
+    jobs:
+    - job: DeployDocker
+      displayName: Deploy docker
+      pool:
+        name: My-AKS-Pool
+      steps:
+        - template: dockerdeploy.yml
+          
