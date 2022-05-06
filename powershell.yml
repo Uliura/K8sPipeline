@@ -1,11 +1,4 @@
 steps:
-  - task: AzureCLI@2
-    inputs:
-      azureSubscription: 'AzureDevOpsSP-K8sPipeline'
-      scriptType: 'ps'
-      scriptLocation: 'inlineScript'
-      inlineScript: 'az version'
-
   - task: AzurePowerShell@5
     inputs:
       azureSubscription: 'AzureDevOpsSP-K8sPipeline'
