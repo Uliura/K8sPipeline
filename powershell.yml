@@ -4,7 +4,6 @@ steps:
       azureSubscription: 'AzureDevOpsSP-K8sPipeline'
       ScriptType: 'InlineScript'
       Inline: |
-          New-AzAksCluster -ResourceGroupName AzureDevOps -Name PwAKSCluster -GenerateSshKey
-          Import-AzAksCredential -ResourceGroupName AzureDevOps -Name AKSCluster
+          Import-AzAksCredential -ResourceGroupName AzureDevOps -Name AKS-agent
       azurePowerShellVersion: 'LatestVersion'
       pwsh: true
