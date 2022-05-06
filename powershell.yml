@@ -4,6 +4,8 @@ steps:
       azureSubscription: 'AzureDevOpsSP-K8sPipeline'
       ScriptType: 'InlineScript'
       Inline: |
+          Install-Module -Name Az -AllowClobber -Force
+          Import-Module Az
           New-AzResourceGroup -Name AzurePipelineGroup -Location eastus 
           New-AzAksCluster -ResourceGroupName AzurePipelineGroup -Name AKSCluster -NodeCount 1
           Import-AzAksCredential -ResourceGroupName AzurePipelineGroup -Name AKSCluster
