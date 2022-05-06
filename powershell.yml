@@ -1,10 +1,8 @@
 steps:
-- task: AzureCLI@2
-  inputs:
-    scriptType: "ps"
-    azureSubscription: 'AzureDevOpsSP-K8sPipeline'
-    scriptLocation: "inlineScript"
-    inlineScript: |
-      New-AzResourceGroup -Name AzurePipelineGroup -Location eastus
-      New-AzAksCluster -ResourceGroupName AzurePipelineGroup -Name AKSCluster -NodeCount 1
-      Import-AzAksCredential -ResourceGroupName AzurePipelineGroup -Name AKSCluster
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        New-AzResourceGroup -Name AzurePipelineGroup -Location eastus
+        New-AzAksCluster -ResourceGroupName AzurePipelineGroup -Name AKSCluster -NodeCount 1
+        Import-AzAksCredential -ResourceGroupName AzurePipelineGroup -Name AKSCluster
