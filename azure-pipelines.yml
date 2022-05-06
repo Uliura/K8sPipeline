@@ -1,12 +1,6 @@
 trigger: none
-variables:
-  # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'dockersc'
-  imageRepository: 'pipeimage'
-  containerRegistry: 'aksagent.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
 
-  stages:
+stages:
 
   - stage: powershell
     displayName: Build infrastructure
@@ -26,7 +20,12 @@ variables:
       displayName: Build docker
       pool:
         name: My-AKS-Pool
-          
+        variables:
+          # Container registry service connection established during pipeline creation
+          dockerRegistryServiceConnection: 'dockersc'
+          imageRepository: 'mydocimage'
+          containerRegistry: 'aksagent.azurecr.io'
+          dockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
       steps:
         - template: dockerbuild.yml
 
