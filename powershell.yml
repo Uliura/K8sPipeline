@@ -4,8 +4,6 @@ steps:
       azureSubscription: 'AzureDevOpsSP-K8sPipeline'
       ScriptType: 'InlineScript'
       Inline: |
-          Install-Module -Name Az -AllowClobber -Force
-          Import-Module Az
           New-AzAksCluster -ResourceGroupName AzureDevOps -Name PwAKSCluster
           Import-AzAksCredential -ResourceGroupName AzureDevOps -Name AKSCluster
       azurePowerShellVersion: 'LatestVersion'
