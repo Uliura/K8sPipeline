@@ -1,0 +1,8 @@
+- task: AzureCLI@2
+  inputs:
+    scriptType: "ps"
+    scriptLocation: "inlineScript"
+    inlineScript: |
+      New-AzResourceGroup -Name AzurePipelineGroup -Location eastus
+      New-AzAksCluster -ResourceGroupName AzurePipelineGroup -Name AKSCluster -NodeCount 1
+      Import-AzAksCredential -ResourceGroupName AzurePipelineGroup -Name AKSCluster
