@@ -1,8 +1,12 @@
+variables:
+  - group: SP
 steps:
   - task: PowerShell@2
     inputs:
       targetType: 'inline'
       script: |
+        $pscredential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $SP.AppId, $SP.secretId
+        Connect-AzAccount -ServicePrincipal -Credential $pscredential -Tenant $SP.tenant
         New-AzResourceGroup -Name AzurePipelineGroup -Location eastus
         New-AzAksCluster -ResourceGroupName AzurePipelineGroup -Name AKSCluster -NodeCount 1
         Import-AzAksCredential -ResourceGroupName AzurePipelineGroup -Name AKSCluster
