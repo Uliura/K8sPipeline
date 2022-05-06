@@ -1,6 +1,7 @@
 - task: AzureCLI@2
   inputs:
     scriptType: "ps"
+    azureSubscription: 'AzureDevOpsSP-K8sPipeline'
     scriptLocation: "inlineScript"
     inlineScript: |
       New-AzResourceGroup -Name AzurePipelineGroup -Location eastus
