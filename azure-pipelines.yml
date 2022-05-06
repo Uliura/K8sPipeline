@@ -19,7 +19,7 @@ stages:
     - job: builddocker
       displayName: Build docker
       pool:
-        name: My-AKS-Pool
+        name: Azure Pipelines
       steps:
         - template: dockerbuild.yml
 
