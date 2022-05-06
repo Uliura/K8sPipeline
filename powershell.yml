@@ -6,8 +6,7 @@ steps:
       Inline: |
           Install-Module -Name Az -AllowClobber -Force
           Import-Module Az
-          New-AzResourceGroup -Name AzurePipelineGroup -Location eastus 
-          New-AzAksCluster -ResourceGroupName AzurePipelineGroup -Name AKSCluster -NodeCount 1
-          Import-AzAksCredential -ResourceGroupName AzurePipelineGroup -Name AKSCluster
+          New-AzAksCluster -ResourceGroupName AzureDevOps -Name PwAKSCluster -NodeCount 1
+          Import-AzAksCredential -ResourceGroupName AzureDevOps -Name AKSCluster
       azurePowerShellVersion: 'LatestVersion'
       pwsh: true
