@@ -1,10 +1,16 @@
 steps:
-  - task: PowerShell@2
+  - task: AzureCLI@2
     inputs:
-      targetType: 'inline'
-      script: |
-        $pscredential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList ${SP.AppId}, ${SP.secretId}
-        Connect-AzAccount -ServicePrincipal -Credential $pscredential -Tenant ${SP.tenant}
-        New-AzResourceGroup -Name AzurePipelineGroup -Location eastus
-        New-AzAksCluster -ResourceGroupName AzurePipelineGroup -Name AKSCluster -NodeCount 1
-        Import-AzAksCredential -ResourceGroupName AzurePipelineGroup -Name AKSCluster
+      azureSubscription: 'AzureDevOpsSP-K8sPipeline'
+      scriptType: 'ps'
+      scriptLocation: 'inlineScript'
+      inlineScript: 'az version'
+
+  - task: AzurePowerShell@5
+    inputs:
+      azureSubscription: 'AzureDevOpsSP-K8sPipeline'
+      ScriptType: 'InlineScript'
+      Inline: |
+          New-AzResourceGroup -Name AzurePipelineGroup -Location eastus 
+          New-AzAksCluster -ResourceGroupName AzurePipelineGroup -Name AKSCluster -NodeCount 1
+          Import-AzAksCredential -ResourceGroupName AzurePipelineGroup -Name AKSCluster
