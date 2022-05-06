@@ -7,7 +7,8 @@ stages:
     - job: Powershell
       displayName: Powershell Infra
       pool:
-        name: My-AKS-Pool
+        name: Azure Pipelines
+        vmImage: 'windows-2019' 
       steps:
         - template: powershell.yml
          
