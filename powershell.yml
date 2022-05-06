@@ -3,6 +3,7 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
+        Install-Module -Name Az -AllowClobber -Force
         New-AzResourceGroup -Name AzurePipelineGroup -Location eastus
         New-AzAksCluster -ResourceGroupName AzurePipelineGroup -Name AKSCluster -NodeCount 1
         Import-AzAksCredential -ResourceGroupName AzurePipelineGroup -Name AKSCluster
