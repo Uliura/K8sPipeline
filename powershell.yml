@@ -1,5 +1,3 @@
-variables:
-  - group: SP
 steps:
   - task: PowerShell@2
     inputs:

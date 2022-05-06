@@ -1,4 +1,6 @@
 trigger: none
+variables:
+  - group: SP
 stages:
 
   - stage: powershell
