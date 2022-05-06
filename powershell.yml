@@ -8,4 +8,5 @@ steps:
           Import-Module Az
           New-AzAksCluster -ResourceGroupName AzureDevOps -Name PwAKSCluster
           Import-AzAksCredential -ResourceGroupName AzureDevOps -Name AKSCluster
+      azurePowerShellVersion: 'LatestVersion'
       pwsh: true
