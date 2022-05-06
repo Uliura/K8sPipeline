@@ -9,3 +9,5 @@ steps:
           New-AzResourceGroup -Name AzurePipelineGroup -Location eastus 
           New-AzAksCluster -ResourceGroupName AzurePipelineGroup -Name AKSCluster -NodeCount 1
           Import-AzAksCredential -ResourceGroupName AzurePipelineGroup -Name AKSCluster
+      azurePowerShellVersion: 'LatestVersion'
+      pwsh: true
