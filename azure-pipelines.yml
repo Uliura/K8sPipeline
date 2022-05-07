@@ -31,5 +31,5 @@ stages:
       pool:
         name: My-AKS-Pool
       steps:
-        - template: 1dockerdeploy.yml
+        - template: dockerdeploy.yml
           
