@@ -8,7 +8,8 @@ variables:
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'pipelinerepogeka-auth'
-
+  kubernetesconnection: 'kubeconnection'
+  
 stages:
 
   - stage: powershell

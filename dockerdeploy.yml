@@ -8,6 +8,7 @@ steps:
   displayName: Create imagePullSecret
   inputs:
     action: createSecret
+    kubernetesServiceConnection: $(kubernetesconnection)
     secretName: $(imagePullSecret)
     dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
 
