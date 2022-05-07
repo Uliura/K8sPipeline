@@ -3,9 +3,10 @@ kind: Service
 metadata:
     name: pipelinerepa
 spec:
-    type: LoadBalancer
-    ports:
-     -port: 80
+  selector:
+    app: pipelinerepa
+  ports:
+    - protocol: TCP
+      port: 80
       targetPort: 8080
-    selector:
-        app: pipelinerepa
+  type: LoadBalancer
