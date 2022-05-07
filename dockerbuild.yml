@@ -3,12 +3,16 @@ steps:
     inputs:
       dockerVersion: '17.09.0-ce'
 
-  
-
   - task: Docker@2
     displayName: Build and push an image to container registry
     inputs:
       containerRegistry: 'dockersc'
-      repository: 'aksagent.azurecr.io'
+      repository: 'pipelinerepa'
       command: 'buildAndPush'
       Dockerfile: '**/Dockerfile'
+      tags: $(Build.BuildId)
+  
+  - task: PublishPipelineArtifact@1
+    inputs:
+      artifactName: 'manifests'
+      path: 'manifests'
