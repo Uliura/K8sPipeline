@@ -16,6 +16,7 @@ steps:
   displayName: Deploy to Kubernetes cluster
   inputs:
     action: deploy
+    kubernetesServiceConnection: 'kubeconnection'
     manifests: |
       $(Pipeline.Workspace)/manifests/deployment.yml
       $(Pipeline.Workspace)/manifests/service.yml
