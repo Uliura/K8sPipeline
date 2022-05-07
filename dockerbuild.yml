@@ -6,13 +6,11 @@ steps:
   - task: Docker@2
     displayName: Build and push an image to container registry
     inputs:
-      containerRegistry: 'dockersc'
-      repository: 'pipelinerepa'
+      containerRegistry: $(dockerRegistryServiceConnection)
+      repository: $(imageRepository)
       command: 'buildAndPush'
-      Dockerfile: '**/Dockerfile'
-      tags: $(Build.BuildId)
+      Dockerfile: $(dockerfilePath)
+      tags: $(tag)
   
-  - task: PublishPipelineArtifact@1
-    inputs:
-      artifactName: 'manifests'
-      path: 'manifests'
+    - upload: manifests
+      artifact: manifests
