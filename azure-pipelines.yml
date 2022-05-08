@@ -28,7 +28,7 @@ stages:
             azureSubscription: 'AzureDevOpsServCon'
             ScriptType: 'InlineScript'
             Inline: |
-              New-AzAksCluster -ResourceGroupName $(resourcegroupname) -Name $(aksclustename) -NodeCount 1 -GenerateSshKey -Force
+              New-AzAksCluster -ResourceGroupName $(resourcegroupname) -Name $(aksclustename) -Location $(azurelocation) -NodeCount 1 -GenerateSshKey -Force
             azurePowerShellVersion: 'LatestVersion'
             pwsh: true
             
