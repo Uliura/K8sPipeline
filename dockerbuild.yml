@@ -11,8 +11,3 @@ steps:
       command: 'buildAndPush'
       Dockerfile: $(dockerfilePath)
       tags: $(tag)
-  
-  - task: PublishPipelineArtifact@1
-    inputs:
-      artifactName: 'manifests'
-      path: 'manifests'
