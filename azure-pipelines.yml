@@ -33,7 +33,7 @@ stages:
             azurePowerShellVersion: 'LatestVersion'
             pwsh: true
           env:
-            MY_MAPPED_ENV_VAR: $(SecretID)
+            PASSWORD: $(SecretID)
             
   - stage: BuildDocker
     displayName: Build docker
