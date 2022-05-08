@@ -9,6 +9,10 @@ variables:
   tag: '$(Build.BuildId)'
   imagePullSecret: 'pipelinerepogeka-auth'
   kubernetesconnection: 'kubeconnection'
+  resourcegroupname: newtestgroup
+  aksclustename:  mynewpwshclaster
+  azurelocation: eastus      
+
   
 stages:
 
@@ -20,7 +24,14 @@ stages:
       pool:
         name: My-AKS-Pool
       steps:
-        - template: powershell.yml
+        - task: AzurePowerShell@5
+          inputs:
+            azureSubscription: 'AzureDevOpsServCon'
+            ScriptType: 'InlineScript'
+            Inline: |
+              Get-AzAksCluster
+            azurePowerShellVersion: 'LatestVersion'
+            pwsh: true
          
             
   - stage: BuildDocker
@@ -32,6 +43,10 @@ stages:
         name: Azure Pipelines
       steps:
         - template: dockerbuild.yml
+        - task: PublishPipelineArtifact@1
+          inputs:
+            artifactName: 'allmanifests.yaml'
+            path: './'
 
   - stage: DeployDocker
     displayName: Deploy docker
@@ -41,5 +56,18 @@ stages:
       pool:
         name: My-AKS-Pool
       steps:
-        - template: dockerdeploy.yml
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifactName: 'allmanifests.yaml'
+              downloadPath: '$(System.ArtifactsDirectory)'
+          - task: AzurePowerShell@5
+            inputs:
+              azureSubscription: 'AzureDevOpsServCon'
+              ScriptType: 'InlineScript'
+              Inline: |
+                Install-AzAksKubectl -Force
+                Import-AzAksCredential -ResourceGroupName $(resourcegroupname) -Name $(aksclustename) -Force
+                kubectl apply -f allmanifest.yaml
+              azurePowerShellVersion: 'LatestVersion'
+              pwsh: true
           
