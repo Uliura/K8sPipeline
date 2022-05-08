@@ -28,9 +28,8 @@ stages:
         - task: AzurePowerShell@5
           inputs:
             azureSubscription: 'AzureDevOpsServCon'
-            ScriptType: 'InlineScript'
-            Inline: |
-              Get-AzAksCluster
+            ScriptType: 'FilePath'
+            ScriptPath: 'make_aks.ps1'
             azurePowerShellVersion: 'LatestVersion'
             pwsh: true
          
