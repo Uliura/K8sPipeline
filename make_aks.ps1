@@ -1,6 +1,6 @@
 Write-Host "$env:TENANT"
 Write-Host "$env:APPID"
-Write-Host "$env:SECRETID"
+Write-Host "$env:MY_MAPPED_ENV_VAR"
 $pscredential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $env:APPID, $env:SECRETID
 Connect-AzAccount -ServicePrincipal -Credential $pscredential -Tenant $env:TENANT
 New-AzResourceGroup -Name $(resourcegroupname) -Location $(azurelocation) -Force

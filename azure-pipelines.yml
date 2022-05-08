@@ -32,7 +32,8 @@ stages:
             ScriptPath: 'make_aks.ps1'
             azurePowerShellVersion: 'LatestVersion'
             pwsh: true
-         
+          env:
+            MY_MAPPED_ENV_VAR: $(SecretID)
             
   - stage: BuildDocker
     displayName: Build docker
