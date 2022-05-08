@@ -32,11 +32,6 @@ stages:
             ScriptPath: 'make_aks.ps1'
             azurePowerShellVersion: 'LatestVersion'
             pwsh: true
-          env:
-            PASSWORD: '$(secretId)'
-
-
-    
             
   - stage: BuildDocker
     displayName: Build docker
