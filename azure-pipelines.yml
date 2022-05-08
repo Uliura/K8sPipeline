@@ -17,8 +17,6 @@ stages:
 
   - stage: powershell
     displayName: Build infrastructure
-    variables:
-    - group: SP
     jobs:
     - job: Powershell
       displayName: Powershell Infra
@@ -28,8 +26,10 @@ stages:
         - task: AzurePowerShell@5
           inputs:
             azureSubscription: 'AzureDevOpsServCon'
-            ScriptType: 'FilePath'
-            ScriptPath: 'make_aks.ps1'
+            ScriptType: 'InlineScript'
+            Inline: |
+              New-AzResourceGroup -Name $(resourcegroupname) -Location $(azurelocation) -Force
+              New-AzAksCluster -ResourceGroupName $(resourcegroupname) -Name $(aksclustename) -NodeCount 1 -GenerateSshKey -Force
             azurePowerShellVersion: 'LatestVersion'
             pwsh: true
             
