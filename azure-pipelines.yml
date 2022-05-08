@@ -19,13 +19,6 @@ stages:
     displayName: Build infrastructure
     variables:
     - group: SP
-    - name: appid
-      value: $[variables.AppId] 
-    - name: tenant
-      value: $[variables.tenant] 
-    - name: secretId
-      value: $[variables.secretId] 
-      
     jobs:
     - job: Powershell
       displayName: Powershell Infra
