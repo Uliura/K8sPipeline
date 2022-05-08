@@ -1,6 +1,5 @@
 trigger: none
 variables:
-
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'dockersc'
   imageRepository: 'pipelinerepa'
@@ -18,6 +17,8 @@ stages:
 
   - stage: powershell
     displayName: Build infrastructure
+    variables:
+    - group: SP
     jobs:
     - job: Powershell
       displayName: Powershell Infra
