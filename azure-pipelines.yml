@@ -30,10 +30,12 @@ stages:
             azureSubscription: 'AzureDevOpsServCon'
             ScriptType: 'FilePath'
             ScriptPath: 'make_aks.ps1'
-          env:
-            PASSWORD: '$(secretId)'
             azurePowerShellVersion: 'LatestVersion'
             pwsh: true
+          env:
+            PASSWORD: '$(secretId)'
+
+
     
             
   - stage: BuildDocker
