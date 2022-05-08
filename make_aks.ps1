@@ -1,5 +1,5 @@
 Write-Host "$(tenant)"
-Write-Host "$(appid)"
+Write-Host "$env:APPID"
 Write-Host "$(secretId)"
 $pscredential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $AppId, $secretId
 Connect-AzAccount -ServicePrincipal -Credential $pscredential -Tenant $tenant
