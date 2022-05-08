@@ -1,3 +1,3 @@
 Connect-AzAccount
-New-AzResourceGroup -Name $env:resourcegroupname -Location $(azurelocation) -Force
-New-AzAksCluster -ResourceGroupName $(resourcegroupname) -Name $(aksclustename) -NodeCount 1 -GenerateSshKey -Force
+New-AzResourceGroup -Name $env:resourcegroupname -Location $env:azurelocation -Force
+New-AzAksCluster -ResourceGroupName $env:resourcegroupname -Name $env:aksclustename -NodeCount 1 -GenerateSshKey -Force
