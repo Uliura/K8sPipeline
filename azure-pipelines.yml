@@ -8,7 +8,7 @@ variables:
   tag: '$(Build.BuildId)'
   imagePullSecret: 'pipelinerepogeka-auth'
   kubernetesconnection: 'kubeconnection'
-  resourcegroupname: "newtestgroup"
+  resourcegroupname: "AzureDevOps"
   aksclustename: "mynewpwshclaster"
   azurelocation: "eastus"      
 
@@ -28,7 +28,6 @@ stages:
             azureSubscription: 'AzureDevOpsServCon'
             ScriptType: 'InlineScript'
             Inline: |
-              New-AzResourceGroup -Name $(resourcegroupname) -Location $(azurelocation) -Force
               New-AzAksCluster -ResourceGroupName $(resourcegroupname) -Name $(aksclustename) -NodeCount 1 -GenerateSshKey -Force
             azurePowerShellVersion: 'LatestVersion'
             pwsh: true
