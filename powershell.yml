@@ -1,9 +1,9 @@
 steps:
-  - task: AzurePowerShell@5
-    inputs:
-      azureSubscription: 'AzureDevOpsSP-K8sPipeline'
-      ScriptType: 'InlineScript'
-      Inline: |
-        Get-AzAksCluster
-      azurePowerShellVersion: 'LatestVersion'
-      pwsh: true
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'PipelineSC'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'az aks create --resource-group $(resourcegroupname) --name $(aksclustername) --node-count 1 --no-ssh-key --node-vm-size standard_D2ads_v5'
+        addSpnToEnvironment: true
+        useGlobalConfig: true

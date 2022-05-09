@@ -11,7 +11,6 @@ variables:
   aksclustername: xzklaster
   azurelocation: northeurope      
 
-  
 stages:
 
   - stage: powershell
@@ -22,14 +21,7 @@ stages:
       pool:
         name: My-AKS-Pool
       steps:
-        - task: AzureCLI@2
-          inputs:
-            azureSubscription: 'PipelineSC'
-            scriptType: 'bash'
-            scriptLocation: 'inlineScript'
-            inlineScript: 'az aks create --resource-group $(resourcegroupname) --name $(aksclustername) --node-count 1 --no-ssh-key --node-vm-size standard_D2ads_v5'
-            addSpnToEnvironment: true
-            useGlobalConfig: true
+       - template: powershell.yml
 
   - stage: BuildDocker
     displayName: Build docker
@@ -40,10 +32,6 @@ stages:
         name: Azure Pipelines
       steps:
         - template: dockerbuild.yml
-        - task: PublishPipelineArtifact@1
-          inputs:
-            artifactName: 'allmanifests.yaml'
-            path: './'
 
   - stage: DeployDocker
     displayName: Deploy docker
@@ -53,19 +41,5 @@ stages:
       pool:
         name: My-AKS-Pool
       steps:
-          - task: DownloadPipelineArtifact@2
-            inputs:
-              artifactName: 'allmanifests.yaml'
-              downloadPath: '$(System.ArtifactsDirectory)'
-          - task: AzureCLI@2
-            inputs:
-              azureSubscription: 'PipelineSC'
-              scriptType: 'bash'
-              scriptLocation: 'inlineScript'
-              inlineScript: |
-                az aks get-credentials --resource-group $(resourcegroupname) --name $(aksclustername)
-                az aks install-cli 
-                kubectl apply -f allmanifest.yaml
-              addSpnToEnvironment: true
-              useGlobalConfig: true
+        - template: dockerdeploy.yml
           
