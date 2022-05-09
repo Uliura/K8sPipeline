@@ -28,6 +28,7 @@ stages:
             azureSubscription: 'PipelineSC'
             ScriptType: 'FilePath'
             ScriptPath: 'make_aks.ps1'
+            azurePowerShellVersion: 'LatestVersion'
 
 
   - stage: BuildDocker
