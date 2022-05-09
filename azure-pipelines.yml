@@ -9,7 +9,7 @@ variables:
   imagePullSecret: 'pipelinerepogeka-auth'
   kubernetesconnection: 'kubeconnection'
   resourcegroupname: AzureDevOps
-  aksclustename: xzklaster
+  aksclustername: xzklaster
   azurelocation: eastus      
 
   
