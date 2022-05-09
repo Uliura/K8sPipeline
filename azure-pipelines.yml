@@ -33,9 +33,9 @@ stages:
         - task: AzureCLI@2
           inputs:
             azureSubscription: 'PipelineSC'
-            scriptType: 'pscore'
-            scriptLocation: 'scriptPath'
-            scriptPath: 'make_aks.ps1'
+            scriptType: 'bash'
+            scriptLocation: 'inlineScript'
+            inlineScript: 'az aks create --resource-group $(resourcegroupname) --name $(aksclustername) --node-count 1 --no-ssh-key --node-vm-size standard_D2ads_v5'
             addSpnToEnvironment: true
             useGlobalConfig: true
 
