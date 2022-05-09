@@ -6,7 +6,7 @@ variables:
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'pipelinerepogeka-auth'
-  kubernetesconnection: 'kubeconnection'
+  kubernetesconnection: 'kubeconnection2'
   resourcegroupname: Pipeline
   aksclustername: xzklaster
   azurelocation: northeurope      
