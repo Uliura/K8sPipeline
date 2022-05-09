@@ -65,14 +65,14 @@ stages:
             inputs:
               artifactName: 'allmanifests.yaml'
               downloadPath: '$(System.ArtifactsDirectory)'
-          - task: AzurePowerShell@5
+          - task: AzureCLI@2
             inputs:
               azureSubscription: 'PipelineSC'
-              ScriptType: 'InlineScript'
-              Inline: |
-                Install-AzAksKubectl -Force
-                Import-AzAksCredential -ResourceGroupName $env:RESOURCEGROUPNAME -Name $env:AKSCLUSTERNAME -Force
-                root/.azure-kubectl/kubectl apply -f allmanifest.yaml
-              azurePowerShellVersion: 'LatestVersion'
-              pwsh: true
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az aks get-credentials --resource-group $(resourcegroupname) --name $(aksclustername)
+                kubectl apply -f allmanifest.yaml
+              addSpnToEnvironment: true
+              useGlobalConfig: true
           
