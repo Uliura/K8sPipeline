@@ -72,6 +72,7 @@ stages:
               scriptLocation: 'inlineScript'
               inlineScript: |
                 az aks get-credentials --resource-group $(resourcegroupname) --name $(aksclustername)
+                az aks install-cli 
                 kubectl apply -f allmanifest.yaml
               addSpnToEnvironment: true
               useGlobalConfig: true
