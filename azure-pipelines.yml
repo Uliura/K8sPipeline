@@ -37,6 +37,7 @@ stages:
             scriptLocation: 'scriptPath'
             scriptPath: 'make_aks.ps1'
             addSpnToEnvironment: true
+            useGlobalConfig: true
 
   - stage: BuildDocker
     displayName: Build docker
