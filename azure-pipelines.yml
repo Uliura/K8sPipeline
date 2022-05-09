@@ -22,13 +22,6 @@ stages:
       pool:
         name: My-AKS-Pool
       steps:
-
-        - task: Bash@3
-          inputs:
-            targetType: 'inline'
-            script: |
-              apt update
-              apt install openssh-server
         - task: AzureCLI@2
           inputs:
             azureSubscription: 'PipelineSC'
