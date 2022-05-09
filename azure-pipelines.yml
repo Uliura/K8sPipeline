@@ -21,16 +21,14 @@ stages:
     - job: Powershell
       displayName: Powershell Infra
       pool:
-        name: Azure Pipelines
-        vmImage: 'windows-2019'
+        vmImage: windows-latest
       steps:
         - task: AzurePowerShell@5
           inputs:
             azureSubscription: 'PipelineSC'
             ScriptType: 'FilePath'
             ScriptPath: 'make_aks.ps1'
-            azurePowerShellVersion: 'LatestVersion'
-            pwsh: true
+
 
   - stage: BuildDocker
     displayName: Build docker
