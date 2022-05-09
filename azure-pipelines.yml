@@ -23,6 +23,11 @@ stages:
       pool:
         name: My-AKS-Pool
       steps:
+        - task: AuthenticatedPowerShell@1  
+          inputs:
+            serviceConnection: 'AzureDevOpsServCon'
+            targetType: inline
+            script: 'Write-Host "url: $env:AS_SC_URL | username: $env:AS_SC_USERNAME | password: $env:AS_SC_PASSWORD"'
         - task: AzurePowerShell@5
           inputs:
             azureSubscription: 'AzureDevOpsServCon'
@@ -56,7 +61,7 @@ stages:
       steps:
           - task: DownloadPipelineArtifact@2
             inputs:
-              artifactName: 'allmanifests.yaml'
+              artifactName: 'lmanifests.yaml'
               downloadPath: '$(System.ArtifactsDirectory)'
           - task: AzurePowerShell@5
             inputs:
