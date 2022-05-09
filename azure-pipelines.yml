@@ -33,7 +33,7 @@ stages:
         - task: AzureCLI@2
           inputs:
             azureSubscription: 'PipelineSC'
-            scriptType: 'ps'
+            scriptType: 'pscore'
             scriptLocation: 'scriptPath'
             scriptPath: 'make_aks.ps1'
             addSpnToEnvironment: true
