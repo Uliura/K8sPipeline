@@ -21,7 +21,7 @@ stages:
     - job: Powershell
       displayName: Powershell Infra
       pool:
-        name: My-AKS-Pool
+        name: Azure Pipelines
       steps:
         - task: AzurePowerShell@5
           inputs:
