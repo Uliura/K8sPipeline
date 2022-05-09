@@ -8,9 +8,9 @@ variables:
   tag: '$(Build.BuildId)'
   imagePullSecret: 'pipelinerepogeka-auth'
   kubernetesconnection: 'kubeconnection'
-  resourcegroupname: AzureDevOps
+  resourcegroupname: Pipeline
   aksclustername: xzklaster
-  azurelocation: eastus      
+  azurelocation: northeurope      
 
   
 stages:
