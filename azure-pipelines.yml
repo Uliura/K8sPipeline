@@ -30,7 +30,7 @@ stages:
             Inline: |
               $token = Get-AzAccessToken 
               echo "##vso[task.setvariable variable=accesstoken;]$($token.Token)"
-              Connect-AzAccount -AccessToken '$(accesstoken)'
+              Connect-AzAccount -AccessToken '$(accesstoken)' -AccountId 7aceb566-5abd-4f7e-8c08-48b1c30f7222
               Get-AzSubscription
             azurePowerShellVersion: 'LatestVersion'
             pwsh: true
