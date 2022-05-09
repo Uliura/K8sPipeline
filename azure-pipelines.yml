@@ -23,14 +23,18 @@ stages:
       pool:
         name: My-AKS-Pool
       steps:
-        - task: AzureCLI@2
-          displayName: 'Azure CLI, with SPN info'
+        - task: AzurePowerShell@5
           inputs:
             azureSubscription: 'AzureDevOpsServCon'
-            scriptType: 'bash'
-            scriptLocation: 'inlineScript'
-            inlineScript: 'env | sort'
-            addSpnToEnvironment: true
+            ScriptType: 'InlineScript'
+            Inline: |
+              $token = Get-AzAccessToken 
+              echo "##vso[task.setvariable variable=accesstoken;]$($token.Token)"
+              Connect-AzAccount -AccessToken $(accesstoken)
+              Get-AzSubscription
+            azurePowerShellVersion: 'LatestVersion'
+            pwsh: true
+
         - task: AzurePowerShell@5
           inputs:
             azureSubscription: 'AzureDevOpsServCon'
