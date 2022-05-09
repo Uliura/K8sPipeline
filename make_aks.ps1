@@ -1,1 +1,1 @@
-New-AzAksCluster -ResourceGroupName $(resourcegroupname) -Name $(aksclustename) -NodeCount 1 -Location $(azurelocation)-GenerateSshKey -Force
+New-AzAksCluster -ResourceGroupName AzureDevOps -Name xzklaster -NodeCount 1 -Location eastus -GenerateSshKey -Force
