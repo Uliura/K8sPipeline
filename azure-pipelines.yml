@@ -23,11 +23,14 @@ stages:
       pool:
         name: My-AKS-Pool
       steps:
-        - task: AuthenticatedPowerShell@1  
+        - task: AzureCLI@2
+          displayName: 'Azure CLI, with SPN info'
           inputs:
-            serviceConnection: 'AzureDevOpsServCon'
-            targetType: inline
-            script: 'Write-Host "url: $env:AS_SC_URL | username: $env:AS_SC_USERNAME | password: $env:AS_SC_PASSWORD"'
+            azureSubscription: 'AzureDevOpsServCon'
+            scriptType: 'bash'
+            scriptLocation: 'inlineScript'
+            inlineScript: 'env | sort'
+            addSpnToEnvironment: true
         - task: AzurePowerShell@5
           inputs:
             azureSubscription: 'AzureDevOpsServCon'
