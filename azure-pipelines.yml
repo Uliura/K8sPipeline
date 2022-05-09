@@ -2,8 +2,13 @@ trigger: none
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'dockersc'
+<<<<<<< HEAD
   imageRepository: pipelinerepa
   containerRegistry: aksagent.azurecr.io
+=======
+  imagerepository: pipelinerepa
+  containerregistry: aksagent.azurecr.io
+>>>>>>> 5c6dea471bc69b54cd5c37f4febbd1dd343fbb15
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'pipelinerepogeka-auth'
@@ -65,14 +70,15 @@ stages:
             inputs:
               artifactName: 'allmanifests.yaml'
               downloadPath: '$(System.ArtifactsDirectory)'
-          - task: AzurePowerShell@5
+          - task: AzureCLI@2
             inputs:
               azureSubscription: 'PipelineSC'
-              ScriptType: 'InlineScript'
-              Inline: |
-                Install-AzAksKubectl -Force
-                Import-AzAksCredential -ResourceGroupName $env:RESOURCEGROUPNAME -Name $env:AKSCLUSTERNAME -Force
-                root/.azure-kubectl/kubectl apply -f allmanifest.yaml
-              azurePowerShellVersion: 'LatestVersion'
-              pwsh: true
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az aks get-credentials --resource-group $(resourcegroupname) --name $(aksclustername)
+                az aks install-cli 
+                kubectl apply -f allmanifest.yaml
+              addSpnToEnvironment: true
+              useGlobalConfig: true
           
