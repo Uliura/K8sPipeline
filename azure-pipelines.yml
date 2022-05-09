@@ -23,25 +23,29 @@ stages:
       pool:
         name: My-AKS-Pool
       steps:
-        - task: AzurePowerShell@5
+        - task: AzureCLI@2
+          name: setVariables
+          displayName: Set Output Variables
+          continueOnError: false
           inputs:
-            azureSubscription: 'AzureDevOpsServCon'
-            ScriptType: 'InlineScript'
-            Inline: |
-              $token = Get-AzAccessToken 
-              echo "##vso[task.setvariable variable=accesstoken;]$($token.Token)"
-              Connect-AzAccount -AccessToken '$(accesstoken)' -AccountId 68e088ff-b061-4e73-a795-36abe90c3df0
-              Get-AzSubscription
-            azurePowerShellVersion: 'LatestVersion'
-            pwsh: true
-        - script: 'echo This is the token: $(accesstoken)'
+            azureSubscription: nameOfAzureServiceConnection
+            scriptType: ps
+            scriptLocation: inlineScript
+            addSpnToEnvironment: true
+            inlineScript: |
+              Write-Host "##vso[task.setvariable variable=azureClientId;isOutput=true]$($env:servicePrincipalId)"
+              Write-Host "##vso[task.setvariable variable=azureClientSecret;isOutput=true]$($env:servicePrincipalKey)"
+              Write-Host "##vso[task.setvariable variable=azureTenantId;isOutput=true]$($env:tenantId)"
+
 
         - task: AzurePowerShell@5
           inputs:
             azureSubscription: 'AzureDevOpsServCon'
             ScriptType: 'InlineScript'
             Inline: |
-              New-AzAksCluster -ResourceGroupName $(resourcegroupname) -Name $(aksclustename) -Location $(azurelocation) -NodeCount 1 -GenerateSshKey -Force
+              $pscredential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $(setVariables.azureClientId), $(setVariables.azureClientSecret)
+              Connect-AzAccount -ServicePrincipal -Credential $pscredential -Tenant $(setVariables.azureTenantId)
+              New-AzResourceGroup -Name $env:resourcegroupname -Location $env:azurelocation -Force
             azurePowerShellVersion: 'LatestVersion'
             pwsh: true
             
