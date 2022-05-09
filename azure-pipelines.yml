@@ -23,18 +23,20 @@ stages:
       pool:
         name: My-AKS-Pool
       steps:
+
         - task: Bash@3
           inputs:
             targetType: 'inline'
             script: |
               apt update
               apt install openssh-server
-        - task: PowerShell@2
+        - task: AzureCLI@2
           inputs:
-            filePath: 'make_aks.ps1'
-            showWarnings: true
-            pwsh: true
-
+            azureSubscription: 'PipelineSC'
+            scriptType: 'pscore'
+            scriptLocation: 'scriptPath'
+            scriptPath: 'make_aks.ps1'
+            addSpnToEnvironment: true
 
   - stage: BuildDocker
     displayName: Build docker
