@@ -1,1 +1,1 @@
-New-AzAksCluster -ResourceGroupName $env:RESOURCEGROUPNAME -Name xzklaster -NodeCount 1 -Location eastus -GenerateSshKey -Force
+New-AzAksCluster -ResourceGroupName $env:RESOURCEGROUPNAME -Name $env:AKSCLUSTERNAME -NodeCount 1 -Location $env:AZURELOCATION -GenerateSshKey -Force
