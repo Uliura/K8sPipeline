@@ -25,7 +25,7 @@ stages:
       steps:
         - task: AzurePowerShell@5
           inputs:
-            azureSubscription: 'AzureDevOpsServCon'
+            azureSubscription: 'PipelineSC'
             ScriptType: 'FilePath'
             ScriptPath: 'make_aks.ps1'
             azurePowerShellVersion: 'LatestVersion'
@@ -59,7 +59,7 @@ stages:
               downloadPath: '$(System.ArtifactsDirectory)'
           - task: AzurePowerShell@5
             inputs:
-              azureSubscription: 'AzureDevOpsServCon'
+              azureSubscription: 'PipelineSC'
               ScriptType: 'InlineScript'
               Inline: |
                 Install-AzAksKubectl -Force
