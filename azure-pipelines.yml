@@ -5,7 +5,7 @@ variables:
   containerRegistry: aksagent.azurecr.io
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
-  imagePullSecret: 'pipelinerepogeka-auth'
+  imagePullSecret: 'pipelinerepogeka2-auth'
   kubernetesconnection: 'kubeconnection2'
   resourcegroupname: Pipeline
   aksclustername: xzklaster
