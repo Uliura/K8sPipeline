@@ -72,7 +72,7 @@ stages:
               Inline: |
                 Install-AzAksKubectl -Force
                 Import-AzAksCredential -ResourceGroupName $env:RESOURCEGROUPNAME -Name $env:AKSCLUSTERNAME -Force
-                kubectl apply -f allmanifest.yaml
+                root/.azure-kubectl/kubectl apply -f allmanifest.yaml
               azurePowerShellVersion: 'LatestVersion'
               pwsh: true
           
