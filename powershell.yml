@@ -1,7 +1,7 @@
 steps:
   - task: AzurePowerShell@5
     inputs:
-      azureSubscription: 'AzureDevOpsSP-K8sPipeline'
+      azureSubscription: 'AzureDevOpsServCon'
       ScriptType: 'InlineScript'
       Inline: |
         Get-AzAksCluster
