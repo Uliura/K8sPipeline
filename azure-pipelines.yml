@@ -22,6 +22,7 @@ stages:
       displayName: Powershell Infra
       pool:
         name: Azure Pipelines
+        vmImage: 'windows-2019'
       steps:
         - task: AzurePowerShell@5
           inputs:
