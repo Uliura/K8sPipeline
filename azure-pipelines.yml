@@ -29,6 +29,7 @@ stages:
             ScriptType: 'FilePath'
             ScriptPath: 'make_aks.ps1'
             azurePowerShellVersion: 'LatestVersion'
+            pwsh: true
 
 
   - stage: BuildDocker
