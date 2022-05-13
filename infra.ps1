@@ -1,9 +1,9 @@
-$AKSName = "xzcluster"
-$ResourceGroupName = "AzureDevOps"
-$Nodes = "1"
-$AksLocation = "eastus"
+$AKSName = xzcluster
+$ResourceGroupName = AzureDevOps
+$Nodes = 1
+$AksLocation = eastus
 
-$AKSName = 'Get-AzAksCluster -Name $AKSName -ResourceGroupName $ResourceGroupName -ErrorAction SilentlyContinue'
+$AKSName = Get-AzAksCluster -Name $AKSName -ResourceGroupName $ResourceGroupName -ErrorAction SilentlyContinue
 
 if($AKSName -eq $null){
     New-AzAksCluster -ResourceGroupName $ResourceGroupName -Name $AKSName -NodeCount $Nodes -Location $AksLocation -GenerateSshKey -SshKeyValue $env:System.DefaultWorkingDirectory -Force
