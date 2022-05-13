@@ -2,10 +2,10 @@ $AKSName = "xzcluster"
 $RGName = "AzureDevOps"
 $Nodes = "1"
 $AksLocation = "eastus"
-Install-Module -Name Az -AllowClobber -Force
-$AKSCheck = Get-AzAksCluster -Name $AKSName -ResourceGroupName $RGName -ErrorAction SilentlyContinue
 
-if($AKSCheck -eq $null){
+$AKSCheck = Get-AzAksCluster -Name $AKSName -ResourceGroupName $RGName -ErrorAction SilentlyContinue
+Write-Host "Check = $AKSCheck"
+if($null -eq $AKSCheck){
     New-AzAksCluster -ResourceGroupName $RGName -Name $AKSName -NodeCount $Nodes -Location $AksLocation -GenerateSshKey -Force
     Write-Host "Error occurred: $_"
 }

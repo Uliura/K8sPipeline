@@ -1,12 +1,4 @@
 steps:
-  - task: AzureCLI@2
-    inputs:
-      azureSubscription: 'AzureDevOpsServCon'
-      scriptType: 'pscore'
-      scriptLocation: 'scriptPath'
-      scriptPath: 'infra.ps1'
-      failOnStandardError: true
-      
   - task: AzurePowerShell@5
     inputs:
       azureSubscription: 'AzureDevOpsServCon'
