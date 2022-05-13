@@ -1,7 +1,3 @@
-$AKSName = "xzcluster"
-$RGName = "AzureDevOps"
-$Nodes = "1"
-$AksLocation = "eastus"
 Write-Host "$AKSName, $RGName, $Nodes , $AksLocation"
 
 $AKSName = Get-AzAksCluster -Name $AKSName -ResourceGroupName $RGName -ErrorAction SilentlyContinue

@@ -1,3 +1,9 @@
+variable:
+AKSName : 'xzcluster'
+RGName : 'AzureDevOps'
+Nodes : 1
+AksLocation : 'eastus'
+
 steps:
   - task: AzurePowerShell@5
     inputs:
