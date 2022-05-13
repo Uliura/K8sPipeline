@@ -7,7 +7,7 @@ $AKSCheck = Get-AzAksCluster -Name $AKSName -ResourceGroupName $RGName -ErrorAct
 
 if($AKSCheck -eq $null){
     New-AzAksCluster -ResourceGroupName $RGName -Name $AKSName -NodeCount $Nodes -Location $AksLocation -GenerateSshKey -Force
-
+    Write-Host "Error occurred: $_"
 }
 else{
     Write-Host "Kubernetes cluster $AKSName already exist"
