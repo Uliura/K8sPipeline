@@ -19,6 +19,7 @@ stages:
       displayName: Powershell Infra
       pool:
         name: Azure Pipelines
+        vmImage: windows-latest
       steps:
         - template: powershell.yml
          
