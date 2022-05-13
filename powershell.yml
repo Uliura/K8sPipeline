@@ -2,7 +2,7 @@ steps:
   - task: Bash@3
     inputs:
       targetType: 'inline'
-      script: 'ssh-keygen -m PEM -t rsa -b 4096'
+      script: 'apt-get install openssh-server -y  && ssh-keygen -m PEM -t rsa -b 4096'
       workingDirectory: '$(System.WorkFolder)'
       failOnStderr: true
   - task: AzurePowerShell@5
