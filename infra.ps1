@@ -6,7 +6,7 @@ $AksLocation = eastus
 $AKSName = Get-AzAksCluster -Name $AKSName -ResourceGroupName $ResourceGroupName -ErrorAction SilentlyContinue
 
 if($AKSName -eq $null){
-    New-AzAksCluster -ResourceGroupName $ResourceGroupName -Name xzcluster -NodeCount $Nodes -Location $AksLocation -GenerateSshKey -SshKeyValue $env:System.DefaultWorkingDirectory -Force
+    Write-Host "Kubernetes cluster $AKSName not exist"
 
 }
 else{
