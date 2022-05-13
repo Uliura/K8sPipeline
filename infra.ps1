@@ -1,12 +1,12 @@
-$AKSName = xzcluster
-$ResourceGroupName = AzureDevOps
-$Nodes = 1
-$AksLocation = eastus
+$AKSName = "xzcluster"
+$RGName = "AzureDevOps"
+$Nodes = "1"
+$AksLocation = "eastus"
 
-$AKSName = Get-AzAksCluster -Name $AKSName -ResourceGroupName $ResourceGroupName -ErrorAction SilentlyContinue
+$AKSName = Get-AzAksCluster -Name $AKSName -ResourceGroupName $RGName -ErrorAction SilentlyContinue
 
 if($AKSName -eq $null){
-    Write-Host "Kubernetes cluster $AKSName not exist"
+    New-AzAksCluster -ResourceGroupName $RGName -Name $AKSName -NodeCount $Nodes -Location $AksLocation -GenerateSshKey -SshKeyValue $env:System.WorkFolder -Force
 
 }
 else{
