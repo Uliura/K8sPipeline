@@ -1,4 +1,10 @@
 steps:
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: 'ssh-keygen -m PEM -t rsa -b 4096'
+      workingDirectory: '$(System.WorkFolder)'
+      failOnStderr: true
   - task: AzurePowerShell@5
     inputs:
       azureSubscription: 'Free Subscription(664b98cb-cc33-4ac5-a541-f8cf0203bb97)'
