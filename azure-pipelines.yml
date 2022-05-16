@@ -1,7 +1,6 @@
 trigger: none
 variables:
 
-  # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'dockersc'
   imageRepository: 'pipelinerepa'
   containerRegistry: 'aksagent.azurecr.io'

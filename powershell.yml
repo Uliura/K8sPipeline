@@ -6,4 +6,3 @@ steps:
       ScriptPath: 'infra.ps1'
       FailOnStandardError: true
       azurePowerShellVersion: 'LatestVersion'
-      pwsh: true
