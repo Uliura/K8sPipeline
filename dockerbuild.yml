@@ -1,7 +1,7 @@
 steps:
 
   - script: |
-        groupadd docker
+        echo "$USER"
         usermod -aG docker $USER
     displayName: try to run docker
 
