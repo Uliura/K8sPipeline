@@ -1,14 +1,11 @@
 steps:
 
-- script: |
+  - script: |
         usermod -aG docker root
         systemctl cat docker.service
         systemctl cat containerd.service
     displayName: try to run docker
-- task: lambda3docker@0
-  inputs:
-    command: 'build'
-    imageBuild: '$(containerRegistry)/$(imageRepository):$(tag)'
+
   - task: Docker@2
     displayName: Build and push an image to container registry
     inputs:
@@ -17,7 +14,7 @@ steps:
       command: 'buildAndPush'
       Dockerfile: $(dockerfilePath)
       tags: $(tag)
-  
+
   - task: PublishPipelineArtifact@1
     inputs:
       artifactName: 'manifests'
