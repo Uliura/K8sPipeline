@@ -3,7 +3,7 @@ steps:
   - script: |
         usermod -aG docker root
         service docker start
-        docker build -f /azp/_work/6/s/app/Dockerfile --label com.azure.dev.image.system.teamfoundationcollectionuri=https://dev.azure.com/gekastudyazure/ --label com.azure.dev.image.system.teamproject=k8sPwsh --label com.azure.dev.image.build.repository.name=Uliura/K8sPipeline --label com.azure.dev.image.build.sourceversion=52c2d46f2cfc6cefd5135fa1968574fc919d17cc --label com.azure.dev.image.build.repository.uri=https://github.com/Uliura/K8sPipeline --label com.azure.dev.image.build.sourcebranchname=dev --label com.azure.dev.image.build.definitionname=Uliura.K8sPipeline --label com.azure.dev.image.build.buildnumber=20220517.29 --label com.azure.dev.image.build.builduri=vstfs:///Build/Build/81 --label image.base.ref.name=node:12.18.1 -t ***/pipelinerepa:81 /azp/_work/6/s/app
+        docker build -f /azp/_work/6/s/app/Dockerfile 
     displayName: try to run docker
 
   - task: Docker@2
