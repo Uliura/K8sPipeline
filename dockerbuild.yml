@@ -1,8 +1,6 @@
 steps:
 
   - script: |
-        rm -fr /var/run/docker.sock
-        dockerd
         service docker start
     displayName: try to run docker
 
