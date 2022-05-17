@@ -1,6 +1,6 @@
 steps:
 
-  - script: |
+- script: |
         usermod -aG docker root
         systemctl cat docker.service
         systemctl cat containerd.service
