@@ -3,7 +3,6 @@ steps:
   - script: |
         usermod -aG docker root
         service docker start
-        docker build -f /azp/_work/6/s/app/Dockerfile 
     displayName: try to run docker
 
   - task: Docker@2
