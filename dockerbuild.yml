@@ -1,11 +1,9 @@
 steps:
-  - task: DockerInstaller@0
-    inputs:
-      dockerVersion: '20.10.9'
-  
+
   - script: |
-      cp /azp/_work/_tool/docker-stable/20.10.9/x64/docker /usr/bin/docker
-      lsb_release -a
+        curl -fsSL https://get.docker.com -o get-docker.sh
+        sh get-docker.sh
+        usermod -aG docker $USER
     displayName: try to run docker
 
   - task: Docker@2
