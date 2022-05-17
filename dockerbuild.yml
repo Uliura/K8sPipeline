@@ -2,7 +2,6 @@ steps:
 
   - script: |
         usermod -aG docker root
-        setfacl -m user:root:rw /var/run/docker.sock
     displayName: try to run docker
 
   - task: Docker@2
