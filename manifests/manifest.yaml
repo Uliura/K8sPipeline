@@ -1,0 +1,33 @@
+---
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: pipelinerepa 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pipelinerepa
+  template:
+    metadata:
+      labels:
+        app: pipelinerepa 
+    spec:
+      containers:
+        - name: pipelinerepa
+          image: aksagent.azurecr.io/pipelinerepa
+          ports:
+          - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: pipelinerepa
+spec:
+  selector:
+    app: pipelinerepa
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
