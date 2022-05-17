@@ -2,8 +2,7 @@ steps:
 
   - script: |
         usermod -aG docker root
-        systemctl cat docker.service
-        systemctl cat containerd.service
+        service --status-all
     displayName: try to run docker
 
   - task: Docker@2
