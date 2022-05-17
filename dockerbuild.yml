@@ -5,7 +5,7 @@ steps:
   
   - script: |
       cp /azp/_work/_tool/docker-stable/20.10.9/x64/docker /usr/bin/docker
-      systemctl start docker
+      start docker
     displayName: try to run docker
 
   - task: Docker@2
