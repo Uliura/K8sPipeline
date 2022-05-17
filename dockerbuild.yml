@@ -2,6 +2,7 @@ steps:
 
   - script: |
         usermod -aG docker root
+        rm -fr /var/run/docker.sock
         service docker start
         dockerd
     displayName: try to run docker
