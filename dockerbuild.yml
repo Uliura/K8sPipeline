@@ -1,18 +1,22 @@
 steps:
 
-
-  - task: lambda3docker@0
-    inputs:
-      command: 'build'
-      imageBuild: '$(containerRegistry)/$(imageRepository):$(tag)'
-
+  - script: |
+        usermod -aG docker root
+        systemctl cat docker.service
+        systemctl cat containerd.service
+    displayName: try to run docker
+- task: lambda3docker@0
+  inputs:
+    command: 'build'
+    imageBuild: '$(containerRegistry)/$(imageRepository):$(tag)'
   - task: Docker@2
-    displayName: Push an image to container registry
+    displayName: Build and push an image to container registry
     inputs:
-      containerRegistry: '$(dockerRegistryServiceConnection)'
-      repository: '$(imageRepository)'
-      command: 'push'
-      tags: '$(tag)'
+      containerRegistry: $(dockerRegistryServiceConnection)
+      repository: $(imageRepository)
+      command: 'buildAndPush'
+      Dockerfile: $(dockerfilePath)
+      tags: $(tag)
   
   - task: PublishPipelineArtifact@1
     inputs:
