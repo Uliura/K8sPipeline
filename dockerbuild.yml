@@ -1,7 +1,6 @@
 steps:
 
   - script: |
-        service docker stop
         rm -fr /var/run/docker.sock
         service docker start
         dockerd
