@@ -2,8 +2,10 @@ steps:
   - task: DockerInstaller@0
     inputs:
       dockerVersion: '20.10.9'
+  
   - script: |
-    service docker start
+      service docker start
+    displayName: try to run docker
 
   - task: Docker@2
     displayName: Build and push an image to container registry
