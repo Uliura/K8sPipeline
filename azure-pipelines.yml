@@ -6,7 +6,6 @@ variables:
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'pipelinerepogeka2-auth'
-  kubernetesconnection: 'kubeconnection2'
   resourcegroupname: Pipeline
   aksclustername: xzklaster
   azurelocation: northeurope      
@@ -19,7 +18,7 @@ stages:
     - job: Powershell
       displayName: Powershell Infra
       pool:
-        name: My-AKS-Pool
+        name: pipeline-agent
       steps:
        - template: powershell.yml
 
@@ -29,7 +28,7 @@ stages:
     - job: builddocker
       displayName: Build docker
       pool:
-        name: Azure Pipelines
+        name: pipeline-agent
       steps:
         - template: dockerbuild.yml
 
@@ -39,7 +38,7 @@ stages:
     - job: DeployDocker
       displayName: Deploy docker
       pool:
-        name: My-AKS-Pool
+        name: pipeline-agent
       steps:
         - template: dockerdeploy.yml
           

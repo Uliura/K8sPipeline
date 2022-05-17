@@ -1,7 +1,7 @@
 steps:
     - task: AzureCLI@2
       inputs:
-        azureSubscription: 'PipelineSC'
+        azureSubscription: 'AzureSC'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: 'az aks create --resource-group $(resourcegroupname) --name $(aksclustername) --node-count 1 --no-ssh-key --node-vm-size standard_D2ads_v5'
