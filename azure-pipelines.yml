@@ -23,5 +23,23 @@ stages:
         - template: powershell.yml
          
             
+  - stage: BuildDocker
+    displayName: Build docker
+    jobs:
+    - job: builddocker
+      displayName: Build docker
+      pool:
+        name: pipeline-agent
+      steps:
+        - template: dockerbuild.yml
 
+  - stage: DeployDocker
+    displayName: Deploy docker
+    jobs:
+    - job: DeployDocker
+      displayName: Deploy docker
+      pool:
+        name: pipeline-agent
+      steps:
+        - template: dockerdeploy.yml
           
