@@ -14,6 +14,8 @@ steps:
       command: 'buildAndPush'
       Dockerfile: $(dockerfilePath)
       tags: $(tag)
+      addPipelineData: false
+      addBaseImageData: false
 
   - task: PublishPipelineArtifact@1
     inputs:
