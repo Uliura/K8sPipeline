@@ -1,7 +1,7 @@
 steps:
 
   - script: |
-        usermod -aG docker root
+        service docker stop
         rm -fr /var/run/docker.sock
         service docker start
         dockerd
