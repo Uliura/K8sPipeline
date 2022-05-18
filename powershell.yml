@@ -4,6 +4,8 @@ steps:
         azureSubscription: 'AzureSC'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
-        inlineScript: 'az aks create --resource-group $(resourcegroupname) --name $(aksclustername) --node-count 1 --no-ssh-key --node-vm-size standard_D2ads_v5'
+        inlineScript: |
+          az group create --name $(resourcegroupname) --location $(azurelocation)
+          az aks create --resource-group $(resourcegroupname) --name $(aksclustername) --node-count 1 --no-ssh-key --node-vm-size standard_D2ads_v5
         addSpnToEnvironment: true
         useGlobalConfig: true
