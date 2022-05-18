@@ -4,23 +4,19 @@ steps:
     artifactName: 'manifests'
     downloadPath: '$(System.ArtifactsDirectory)/manifests'
  
-- task: KubernetesManifest@0
-  displayName: Create imagePullSecret
+- task: Kubernetes@1
   inputs:
-    action: createSecret
-    kubernetesServiceConnection: $(kubernetesconnection)
-    secretName: $(imagePullSecret)
-    dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+    connectionType: 'Azure Resource Manager'
+    azureSubscriptionEndpoint: 'AzureSC'
+    azureResourceGroup: $(resourcegroupname)
+    kubernetesCluster: $(aksclustername)
+    command: 'apply'
+    arguments: '-f $(System.ArtifactsDirectory)/manifests/manifest.yaml'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Azure Container Registry'
+    azureSubscriptionEndpointForSecrets: 'AzureSC'
+    azureContainerRegistry: '$(containerRegistry)/$(imagename):$(tag)'
+    secretName: '$(imagePullSecret)'
+    outputFormat: 'yaml'
 
-- task: KubernetesManifest@0
-  displayName: Deploy to Kubernetes cluster
-  inputs:
-    action: deploy
-    kubernetesServiceConnection: $(kubernetesconnection)
-    manifests: |
-      $(System.ArtifactsDirectory)/manifests/deployment.yml
-      $(System.ArtifactsDirectory)/manifests/service.yml
-    imagePullSecrets: |
-      $(imagePullSecret)
-    containers: |
-      $(containerRegistry)/$(imageRepository):$(tag)
+

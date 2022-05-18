@@ -1,14 +1,15 @@
 trigger: none
 variables:
-
   dockerRegistryServiceConnection: 'dockersc'
-  imageRepository: 'pipelinerepa'
-  containerRegistry: 'aksagent.azurecr.io'
+  imagename: pipelinetest
+  containerRegistry: gekaimages.azurecr.io
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
-  imagePullSecret: 'pipelinerepogeka-auth'
-  kubernetesconnection: 'kubeconnection'
-  
+  imagePullSecret: 'pipelinerepogeka2-auth'
+  resourcegroupname: Pipeline
+  aksclustername: xzklaster
+  azurelocation: northeurope      
+
 stages:
 
   - stage: powershell
@@ -18,11 +19,9 @@ stages:
       displayName: Powershell Infra
       pool:
         name: pipeline-agent
-
       steps:
-        - template: powershell.yml
-         
-            
+       - template: powershell.yml
+
   - stage: BuildDocker
     displayName: Build docker
     jobs:
