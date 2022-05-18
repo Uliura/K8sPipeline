@@ -2,30 +2,30 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: pipelinerepa 
+  name: $(imagename) 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pipelinerepa
+      app: $(imagename)
   template:
     metadata:
       labels:
-        app: pipelinerepa 
+        app: $(imagename) 
     spec:
       containers:
-        - name: pipelinerepa
-          image: aksagent.azurecr.io/pipelinerepa
+        - name: $(imagename)
+          image: $(containerRegistry)/$(imagename)
           ports:
           - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: pipelinerepa
+    name: $(imagename)
 spec:
   selector:
-    app: pipelinerepa
+    app: $(imagename)
   ports:
     - protocol: TCP
       port: 80

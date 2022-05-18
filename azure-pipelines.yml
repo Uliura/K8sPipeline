@@ -1,7 +1,7 @@
 trigger: none
 variables:
   dockerRegistryServiceConnection: 'dockersc'
-  imageRepository: pipelinerepa
+  imagename: pipelinetest
   containerRegistry: gekaimages.azurecr.io
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
