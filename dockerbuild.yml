@@ -1,7 +1,7 @@
 steps:
 
   - script: |
-        systemctl start docker
+        service docker start
     displayName: try to run docker
 
   - task: Docker@2
