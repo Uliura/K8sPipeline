@@ -11,7 +11,7 @@ steps:
     azureResourceGroup: $(resourcegroupname)
     kubernetesCluster: $(aksclustername)
     command: 'apply'
-    arguments: '-f manifest.yaml'
+    arguments: '-f $(System.ArtifactsDirectory)/manifests/manifest.yaml'
     secretType: 'dockerRegistry'
     containerRegistryType: 'Azure Container Registry'
     azureSubscriptionEndpointForSecrets: 'AzureSC'
