@@ -7,5 +7,6 @@ steps:
         inlineScript: |
           az group create --name $(resourcegroupname) --location $(azurelocation)
           az aks create --resource-group $(resourcegroupname) --name $(aksclustername) --node-count 1 --no-ssh-key --node-vm-size standard_D2ads_v5
+          az aks update -n (aksclustername)-g $(resourcegroupname) --attach-acr gekaimages
         addSpnToEnvironment: true
         useGlobalConfig: true
