@@ -8,8 +8,8 @@ steps:
   inputs:
     connectionType: 'Azure Resource Manager'
     azureSubscriptionEndpoint: 'AzureSC'
-    azureResourceGroup: 'AzureDevOps'
-    kubernetesCluster: 'pipeline-agent'
+    azureResourceGroup: $(resourcegroupname)
+    kubernetesCluster: $(aksclustername)
     command: 'apply'
     arguments: '-f manifest.yaml'
     secretType: 'dockerRegistry'
