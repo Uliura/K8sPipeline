@@ -1,7 +1,7 @@
 steps:
 
   - script: |
-        service docker start
+        chown -R $USER:$USER /var/run/docker.sock
     displayName: try to run docker
 
   - task: Docker@2
