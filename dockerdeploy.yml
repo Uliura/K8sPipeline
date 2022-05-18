@@ -17,5 +17,4 @@ steps:
     azureSubscriptionEndpointForSecrets: 'AzureSC'
     azureContainerRegistry: '$(containerRegistry)/$(imageRepository):$(tag)'
     secretName: '$(imagePullSecret)'
-    forceUpdate: false
     outputFormat: 'yaml'
