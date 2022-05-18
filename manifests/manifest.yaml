@@ -2,30 +2,30 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: $(imagename) 
+  name: pipelinetest
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: $(imagename)
+      app: pipelinetest
   template:
     metadata:
       labels:
-        app: $(imagename) 
+        app: pipelinetest
     spec:
       containers:
-        - name: $(imagename)
-          image: $(containerRegistry)/$(imagename)
+        - name: pipelinetest
+          image: gekaimages.azurecr.io/pipelinetest
           ports:
           - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: $(imagename)
+    name: pipelinetest
 spec:
   selector:
-    app: $(imagename)
+    app: pipelinetest
   ports:
     - protocol: TCP
       port: 80
