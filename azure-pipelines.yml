@@ -2,7 +2,7 @@ trigger: none
 variables:
   dockerRegistryServiceConnection: 'dockersc'
   imageRepository: pipelinerepa
-  containerRegistry: aksagent.azurecr.io
+  containerRegistry: gekaimages.azurecr.io
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'pipelinerepogeka2-auth'
