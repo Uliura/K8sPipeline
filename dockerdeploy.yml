@@ -17,7 +17,7 @@ steps:
     containerRegistryType: 'Azure Container Registry'
     azureSubscriptionEndpointForSecrets: 'AzureSC'
     azureContainerRegistry: '$(containerRegistry)/$(imagename):$(tag)'
-    secretName: '$(imagePullSecret)'
+    secretName: '$(dockerRegistryServiceConnection)'
     outputFormat: 'yaml'
 
 
