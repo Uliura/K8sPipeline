@@ -16,8 +16,8 @@ steps:
     secretType: 'dockerRegistry'
     containerRegistryType: 'Azure Container Registry'
     azureSubscriptionEndpointForSecrets: 'AzureSC'
-    azureContainerRegistry: '$(containerRegistry)'
-    secretName: '$(dockerRegistryServiceConnection)'
+    azureContainerRegistry: 'gekaimages'
+    secretName: '$(imagePullSecret)'
     outputFormat: 'yaml'
 
 
