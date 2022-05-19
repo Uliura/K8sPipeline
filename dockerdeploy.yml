@@ -6,11 +6,8 @@ steps:
  
 - task: Kubernetes@1
   inputs:
-    connectionType: 'Azure Resource Manager'
-    azureSubscriptionEndpoint: 'AzureSC'
-    azureResourceGroup: $(resourcegroupname)
-    kubernetesCluster: $(aksclustername)
-    useClusterAdmin: true
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'kubeconnect'
     command: 'apply'
     arguments: '-f $(System.ArtifactsDirectory)/manifests/manifest.yaml'
     secretType: 'dockerRegistry'
@@ -19,5 +16,4 @@ steps:
     azureContainerRegistry: 'gekaimages'
     secretName: '$(imagePullSecret)'
     outputFormat: 'yaml'
-
 
