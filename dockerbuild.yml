@@ -6,7 +6,7 @@ steps:
       repository: $(imagename)
       command: 'buildAndPush'
       Dockerfile: $(dockerfilePath)
-      tags: $(tag)
+      tags: latest
   
   - task: PublishPipelineArtifact@1
     inputs:
