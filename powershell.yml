@@ -6,7 +6,7 @@ steps:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az group create --name $(resourcegroupname) --location $(azurelocation)
-          az aks create -g $(resourcegroupname) -n $(aksclustername) --node-count 1 --no-ssh-key --node-vm-size standard_D2ads_v5 --attach-acr gekaimages --network-plugin azure --enable-managed-identity -a ingress-appgw --appgw-name gekaApplicationGateway --appgw-subnet-cidr "10.2.0.0/16"
+          az aks create -g $(resourcegroupname) -n $(aksclustername) --node-count 1 --no-ssh-key --node-vm-size standard_D2ads_v5 --attach-acr gekaimages --network-plugin azure --enable-managed-identity -a ingress-appgw --appgw-name gekaApplicationGateway 
         addSpnToEnvironment: true
         useGlobalConfig: true
 
