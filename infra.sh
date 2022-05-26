@@ -54,7 +54,7 @@ az network application-gateway create \
   --cert-file ag.pfx \
   --cert-password "password"
 
-#appgwId=$(az network application-gateway show -n GekaApplicationGateway -g Pipeline -o tsv --query "id") 
-#az aks enable-addons -n xzklaster -g Pipeline -a ingress-appgw --appgw-id $appgwId
+appgwId=$(az network application-gateway show -n GekaApplicationGateway -g Pipeline -o tsv --query "id") 
+az aks enable-addons -n xzklaster -g Pipeline -a ingress-appgw --appgw-id $appgwId
 
 
