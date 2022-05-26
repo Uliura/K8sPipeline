@@ -31,11 +31,12 @@ az aks create \
 --no-ssh-key \
 --node-vm-size standard_D2ads_v5 \
 --network-plugin azure \
---enable-managed-identity \
+--enable-managed-identity -y \
 --service-cidr 10.0.3.0/24 \
 --dns-service-ip 10.0.3.10 \
 --vnet-subnet-id $SUBNETID \
 --attach-acr gekaimages 
+
 
 
 az network application-gateway create \
