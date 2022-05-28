@@ -28,23 +28,14 @@ az network public-ip create \
   --sku Standard \
   --location northeurope
 
-az ad sp create-for-rbac --skip-assignment > auth.json
-
-APP_ID=$(jq -r '.appId' auth.json)
-PASSWORD=$(jq -r '.password' auth.json)
-
-VNET_ID=$(az network vnet show -g $ResourceGroup -n $VNetName --query id -o tsv)
 SUBNETID=$(az network vnet subnet list --resource-group $ResourceGroup --vnet-name $VNetName --query "[?name=='myBackendSubnet'].id" --output tsv)
-
-az role assignment create --assignee $APP_ID --scope $VNET_ID --role "Network Contributor"
 
 az aks create \
 --resource-group $ResourceGroup \
 --name $AKSCluster \
 --node-count 1 \
 --no-ssh-key \
---service-principal $APP_ID \
---client-secret $PASSWORD \
+--enable-managed-identity -y \
 --node-vm-size standard_D2ads_v5 \
 --vnet-subnet-id $SUBNETID \
 --attach-acr gekaimages 
@@ -68,12 +59,12 @@ az network application-gateway create \
   --subnet myAGsubnet \
   --sku Standard_v2 \
   --public-ip-address myAGPublicIPAddress 
-#  --http-settings-cookie-based-affinity Disabled \
-#  --frontend-port 443 \
-#  --http-settings-port 80 \
-# --http-settings-protocol Http \
-#  --cert-file ag.pfx \
-#  --cert-password "password"
+  --http-settings-cookie-based-affinity Disabled \
+  --frontend-port 443 \
+  --http-settings-port 80 \
+ --http-settings-protocol Http \
+  --cert-file ag.pfx \
+  --cert-password "password"
 
 az network application-gateway address-pool create \
 --gateway-name $AppGtwName \
