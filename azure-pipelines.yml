@@ -4,22 +4,27 @@ variables:
   imagename: pipelinetest
   containerRegistry: gekaimages.azurecr.io
   dockerfilePath: '**/Dockerfile'
-  tag: '$(Build.BuildId)'
-  imagePullSecret: 'pipelinerepogeka2-auth'
-  resourcegroupname: Pipeline
-  aksclustername: xzklaster
-  azurelocation: northeurope      
 
 stages:
 
-  - stage: powershell
-    displayName: Build infrastructure
+  - stage: BuildDocker
+    displayName: Build and push docker
     jobs:
-    - job: Powershell
-      displayName: Powershell Infra
+    - job: docker
+      displayName: Build and push docker
       pool:
         name: pipeline-agent
       steps:
-       - template: powershell.yml
+        - template: dockerbuild.yml
+
+  - stage: createInfrastucture
+    displayName: Build infrastructure
+    jobs:
+    - job: AzCli
+      displayName: Az Cli Infra
+      pool:
+        name: pipeline-agent
+      steps:
+       - template: infrastucture.yml
 
           
