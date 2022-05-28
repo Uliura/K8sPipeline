@@ -40,16 +40,12 @@ az aks create \
 --vnet-subnet-id $SUBNETID \
 --attach-acr gekaimages 
 
-az aks get-credentials -n $AKSCluster -g $ResourceGroup
+az aks get-credentials -n $AKSCluster -g $ResourceGroup --overwrite-existing
 
 NAMESPACE="ingress-basic"
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
-
 helm install ingress-nginx ingress-nginx/ingress-nginx --create-namespace --namespace $NAMESPACE -f internal-ingress.yaml
-
-kubectl get svc -n ingress-basic
-
 
 az network application-gateway create \
   --name $AppGtwName \
