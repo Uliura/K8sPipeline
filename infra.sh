@@ -67,11 +67,11 @@ az network application-gateway create \
   --vnet-name $VNetName \
   --subnet myAGsubnet \
   --sku Standard_v2 \
+  --public-ip-address myAGPublicIPAddress 
 #  --http-settings-cookie-based-affinity Disabled \
 #  --frontend-port 443 \
 #  --http-settings-port 80 \
- # --http-settings-protocol Http \
-  --public-ip-address myAGPublicIPAddress 
+# --http-settings-protocol Http \
 #  --cert-file ag.pfx \
 #  --cert-password "password"
 
@@ -81,23 +81,12 @@ az network application-gateway address-pool create \
 --name nginx-controller-pool \
 --servers 10.10.0.50
 
-# Now add listener, using wildcard, that points to the Nginx Controller Ip and routes to the proper web app
-az network application-gateway http-listener create \
-  --name aks-ingress-listener \
-  --frontend-ip appGatewayFrontendIP \
-  --frontend-port appGatewayFrontendPort \
-  --resource-group $ResourceGroup \
-  --gateway-name $AppGtwName \
 
-#Add a rule that glues the listener and the backend pool
-az network application-gateway rule create \
-  --gateway-name $AppGtwName \
-  --name aks-apps \
-  --resource-group $ResourceGroup \
-  --http-listener aks-ingress-listener \
-  --rule-type Basic \
-  --address-pool nginx-controller-pool
-
+az network application-gateway rule update \
+--resource-group $ResourceGroup \
+--gateway-name $AppGtwName \
+--name rule1 \
+--address-pool nginx-controller-pool
 
 
 
