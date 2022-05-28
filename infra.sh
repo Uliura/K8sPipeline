@@ -88,7 +88,7 @@ az network application-gateway rule update \
 --name rule1 \
 --address-pool nginx-controller-pool
 
-
+kubectl apply -f manifest.yaml 
 
 
 
