@@ -58,28 +58,49 @@ az network application-gateway create \
   --vnet-name $VNetName \
   --subnet myAGsubnet \
   --sku Standard_v2 \
-  --public-ip-address myAGPublicIPAddress 
+  --public-ip-address myAGPublicIPAddress \
   --http-settings-cookie-based-affinity Disabled \
   --frontend-port 443 \
   --http-settings-port 80 \
- --http-settings-protocol Http \
+  --http-settings-protocol Http \
   --cert-file ag.pfx \
   --cert-password "password"
 
 az network application-gateway address-pool create \
---gateway-name $AppGtwName \
---resource-group $ResourceGroup \
---name nginx-controller-pool \
---servers 10.10.0.50
-
+  --gateway-name $AppGtwName \
+  --resource-group $ResourceGroup \
+  --name nginx-controller-pool \
+  --servers 10.10.0.50
 
 az network application-gateway rule update \
---resource-group $ResourceGroup \
---gateway-name $AppGtwName \
---name rule1 \
---address-pool nginx-controller-pool
+  --gateway-name $AppGtwName \
+  --resource-group $ResourceGroup \
+  --name rule1 \
+  --address-pool nginx-controller-pool
 
 kubectl apply -f manifest.yaml 
 
+az network application-gateway http-listener create \
+  --gateway-name $AppGtwName \
+  --resource-group $ResourceGroup \
+  --name http-listener \
+  --frontend-ip appGatewayFrontendIP \
+  --frontend-port port_80
 
+az network application-gateway redirect-config create \
+  --gateway-name $AppGtwName \
+  --resource-group $ResourceGroup \
+  --name RedirectConfig \
+  --type Permanent \
+  --include-path true \
+  --include-query-string true \
+  --target-listener appGatewayHttpListener
+
+az network application-gateway rule create \
+  --gateway-name $AppGtwName \
+  --resource-group $ResourceGroup \
+  --name rule2 \
+  --priority 10020 \
+  --http-listener http-listener \
+  --redirect-config RedirectConfig
 
