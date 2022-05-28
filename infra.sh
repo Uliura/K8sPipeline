@@ -88,7 +88,6 @@ az network application-gateway http-listener create \
   --frontend-port appGatewayFrontendPort \
   --resource-group $ResourceGroup \
   --gateway-name $AppGtwName \
-  --host-names "*.$YOUR_DOMAIN"
 
 #Add a rule that glues the listener and the backend pool
 az network application-gateway rule create \
@@ -102,7 +101,5 @@ az network application-gateway rule create \
 
 
 
-appgwId=$(az network application-gateway show -n $AppGtwName -g $ResourceGroup -o tsv --query "id") 
-az aks enable-addons -n $AKSCluster -g $ResourceGroup -a ingress-appgw --appgw-id $appgwId
 
 
