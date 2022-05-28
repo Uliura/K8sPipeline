@@ -45,7 +45,8 @@ az aks get-credentials -n $AKSCluster -g $ResourceGroup --overwrite-existing
 NAMESPACE="ingress-basic"
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
-helm install ingress-nginx ingress-nginx/ingress-nginx --create-namespace --namespace $NAMESPACE -f internal-ingress.yaml
+helm install ingress-nginx ingress-nginx/ingress-nginx \
+--create-namespace --namespace $NAMESPACE -f internal-ingress.yaml
 
 az network application-gateway create \
   --name $AppGtwName \
@@ -76,12 +77,18 @@ az network application-gateway rule update \
 
 kubectl apply -f manifest.yaml 
 
+az network application-gateway frontend-port create \
+  --gateway-name $AppGtwName \
+  --resource-group $ResourceGroup \
+  --name HttpPort \
+  --port 80
+
 az network application-gateway http-listener create \
   --gateway-name $AppGtwName \
   --resource-group $ResourceGroup \
   --name http-listener \
   --frontend-ip appGatewayFrontendIP \
-  --frontend-port port_80
+  --frontend-port HttpPort
 
 az network application-gateway redirect-config create \
   --gateway-name $AppGtwName \
@@ -96,7 +103,6 @@ az network application-gateway rule create \
   --gateway-name $AppGtwName \
   --resource-group $ResourceGroup \
   --name rule2 \
-  --priority 10020 \
   --http-listener http-listener \
   --redirect-config RedirectConfig
 
